@@ -13,15 +13,28 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cert-monitor</name>
 	<description>Simple spring boot application to monitor and alert on k8s certs installed using cert-manager</description>
+
 	<properties>
+		<springboot.version>2.6.2</springboot.version>
 		<java.version>11</java.version>
+		<fabric8.version>5.11.1</fabric8.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>io.fabric8</groupId>
+			<artifactId>certmanager-client</artifactId>
+			<version>${fabric8.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.4</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -34,6 +47,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${springboot.version}</version>
 			</plugin>
 		</plugins>
 	</build>
