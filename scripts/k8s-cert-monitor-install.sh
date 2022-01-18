@@ -10,6 +10,11 @@ helm lint ../charts/k8s-cert-monitor
 echo "Installing k8s-cert-monitor app in the default namespace"
 helm install k8s-cert-monitor ../charts/k8s-cert-monitor
 
+echo "Configuring service monitors & alert rules..."
+kubectl create secret generic additional-scrape-configs --from-file=prometheus-additional.yaml --dry-run -oyaml > additional-scrape-configs.yaml
+kubectl apply -f additional-scrape-configs.yaml -n monitoring
+kubectl apply -f k8s-cert-expiry-alert-rule.yaml
+
 echo "Waiting for 10s seconds to let the containers initialize..."
 sleep 10s
 minikube service k8s-cert-monitor
