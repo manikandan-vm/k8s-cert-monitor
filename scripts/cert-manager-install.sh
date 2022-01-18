@@ -29,3 +29,6 @@ helm repo update
 echo "Installing cert-manager ${VERSION} to namespace ${NAMESPACE} as '${NAME}' ..."
 helm install --namespace ${NAMESPACE} --version ${VERSION} ${NAME} jetstack/cert-manager
 echo "Successfully installed cert-manager ${VERSION}."
+
+
+
