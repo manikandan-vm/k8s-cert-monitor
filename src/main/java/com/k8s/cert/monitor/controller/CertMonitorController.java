@@ -19,7 +19,12 @@ public class CertMonitorController {
 
     @GetMapping("/certs/{namespace}/list")
     public List<Certificate> listCertificates(@PathVariable String namespace) {
-            return certMonitorService.listAllCertsByNamespace(namespace);
+        return certMonitorService.listAllCertsByNamespace(namespace);
+    }
+
+    @GetMapping("/certs/list")
+    public List<Certificate> listCertificates() {
+        return certMonitorService.listAllCertsInAnyNamespace();
     }
 
 }

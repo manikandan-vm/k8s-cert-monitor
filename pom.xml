@@ -18,12 +18,23 @@
 		<springboot.version>2.6.2</springboot.version>
 		<java.version>11</java.version>
 		<fabric8.version>5.11.1</fabric8.version>
+		<micrometer.version>1.8.2</micrometer.version>
+		<springdoc.version>1.6.4</springdoc.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+			<version>${micrometer.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.fabric8</groupId>
@@ -33,7 +44,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.6.4</version>
+			<version>${springdoc.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
