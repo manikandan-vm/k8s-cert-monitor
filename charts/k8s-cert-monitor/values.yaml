@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: manikandanvm/k8s-cert-monitor:0.0.1-SNAPSHOT
-  pullPolicy: IfNotPresent
+  repository: manikandanvm/k8s-cert-monitor
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
@@ -37,7 +37,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
+  type: NodePort
   port: 8080
 
 ingress:

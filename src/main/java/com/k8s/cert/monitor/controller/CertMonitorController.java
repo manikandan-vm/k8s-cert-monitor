@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("api/v1/cert-monitor/")
+@RequestMapping("/api/v1/cert-monitor")
 public class CertMonitorController {
 
     private static final Logger logger = Logger.getLogger(CertMonitorController.class.getSimpleName());
@@ -17,7 +17,7 @@ public class CertMonitorController {
     @Autowired
     private CertMonitorService certMonitorService;
 
-    @GetMapping("/certs/{namespace}/list/")
+    @GetMapping("/certs/{namespace}/list")
     public List<Certificate> listCertificates(@PathVariable String namespace) {
             return certMonitorService.listAllCertsByNamespace(namespace);
     }

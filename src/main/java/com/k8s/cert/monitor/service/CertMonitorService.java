@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
@@ -24,6 +25,9 @@ public class CertMonitorService {
             } else {
                 return Collections.emptyList();
             }
+        } catch (Exception e) {
+            logger.severe(String.format("Error while accessing certs in %s namespace.", namespace));
+            return Collections.emptyList();
         }
     }
 }
