@@ -6,21 +6,12 @@ minikube delete && minikube start --kubernetes-version=v1.20.0 --memory=6g --boo
 echo "Disabling metrics add on ..."
 minikube addons disable metrics-server
 
+echo "Cleaning up kube-prometheus directory if it exists"
+rm -rf kube-prometheus/
+echo "Checking out kube-prometheus project"
+git clone git@github.com:prometheus-operator/kube-prometheus.git
+
 # Create the namespace and CRDs, and then wait for them to be available before creating the remaining resources
-kubectl apply --server-side -f manifests/setup
+kubectl apply --server-side -f kube-prometheus/manifests/setup
 until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
-kubectl apply -f manifests/
-
-echo "Running port-forwards to access prometheus, grafana and alert manager in local..."
-#Prometheus, Grafana, and Alertmanager dashboards can be accessed quickly using kubectl port-forward after running the quickstart via the commands below. Kubernetes 1.10 or later is required.
-kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090 &
-
-kubectl --namespace monitoring port-forward svc/grafana 3000 &
-
-kubectl --namespace monitoring port-forward svc/alertmanager-main 9093 &
-
-echo "Access prometheus: http://localhost:9090"
-echo "Access grafana:  http://localhost:3000"
-echo "Access alert-manager: http://localhost:9093"
-
-
+kubectl apply -f kube-prometheus/manifests/

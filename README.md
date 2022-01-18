@@ -5,6 +5,7 @@ An utility app to monitor and alert certs managed by k8s cert-manager
 
  * [Helm](https://helm.sh/) - This project was developed and tested on helm 3
  * [Docker](https://www.docker.com/products/docker-desktop) - This project was tested on docker mac
+ * [Kubernetes Tools](https://kubernetes.io/docs/tasks/tools/) - kubectl
  * [Kubernetes | Minikube](https://minikube.sigs.k8s.io/docs/start/)
 
 For building and running the application you will need, 
@@ -30,6 +31,19 @@ sh scripts/cert-manager-install.sh
 sh scripts/k8s-cert-monitor-install.sh
 ```
 This will open up the swagger doc from where api(s) can be accessed. 
+
+Also, the prometheus stack can be accessed via port-forwards as follows,
+ ```shell
+    #Prometheus, Grafana, and Alertmanager dashboards can be accessed quickly using kubectl port-forward after running the quickstart via the commands below. Kubernetes 1.10 or later is required.
+        
+    kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090 &
+
+    kubectl --namespace monitoring port-forward svc/grafana 3000 &
+
+    kubectl --namespace monitoring port-forward svc/alertmanager-main 9093 &
+  ```
+
+Once the port-foward is done, you can find the cert-monitoring rule in the prometheus UI. 
 
 ## Running the application locally
 
