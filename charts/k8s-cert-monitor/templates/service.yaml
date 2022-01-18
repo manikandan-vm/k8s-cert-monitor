@@ -4,6 +4,11 @@ metadata:
   name: {{ include "k8s-cert-monitor.fullname" . }}
   labels:
     {{- include "k8s-cert-monitor.labels" . | nindent 4 }}
+    app: k8s-cert-monitor
+  annotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: "8080"
+    prometheus.io/scrape: "true"
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -13,3 +18,4 @@ spec:
       name: http
   selector:
     {{- include "k8s-cert-monitor.selectorLabels" . | nindent 4 }}
+    app: k8s-cert-monitor

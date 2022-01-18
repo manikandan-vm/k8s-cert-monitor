@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: k8s-cert-monitor-service-monitor
+spec:
+  selector:
+    matchLabels:
+      app: k8s-cert-monitor
+  namespaceSelector:
+    matchNames:
+      - default
+  endpoints:
+    - port: http
+      path: "/actuator/prometheus"
+      interval: 30s

@@ -4,12 +4,12 @@ metadata:
   name: selfsigned-crt
 spec:
   secretName: tls-secret
-  duration: 170000h
+  duration: 384h
   renewBefore: 72h
   issuerRef:
     kind: Issuer
     name: selfsigned
   commonName: "k8scertmonitor.local"
-  isCA: true
+  isCA: false
   dnsNames:
     - "k8scertmonitor.local"

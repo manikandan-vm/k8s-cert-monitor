@@ -11,6 +11,7 @@ spec:
   selector:
     matchLabels:
       {{- include "k8s-cert-monitor.selectorLabels" . | nindent 6 }}
+      app: k8s-cert-monitor
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,6 +20,7 @@ spec:
       {{- end }}
       labels:
         {{- include "k8s-cert-monitor.selectorLabels" . | nindent 8 }}
+        app: k8s-cert-monitor
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

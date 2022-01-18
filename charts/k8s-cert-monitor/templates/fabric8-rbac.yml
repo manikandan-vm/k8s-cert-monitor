@@ -17,7 +17,7 @@ subjects:
     # Reference to upper's `metadata.name`
     name: {{ include "k8s-cert-monitor.serviceAccountName" . }}
     # Reference to upper's `metadata.namespace`
-    namespace: default
+    namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
   name: cluster-admin

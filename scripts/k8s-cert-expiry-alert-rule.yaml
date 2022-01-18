@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: k8s-cert-monitor-alert-rules
+spec:
+  groups:
+    - name: k8s-cert-monitor-rules
+      rules:
+        - alert: CertExpirySoon
+          expr: avg by (cert_namespace, cert_name) ( cert_time_to_expire_total < (3 * 24 * 60 * 60))
+          for: 4s
+          labels:
+            severity: warning
+          annotations:
+            summary: "Cert expiration threshold on {{ $labels.cert_name }}"
+            description: "{{ $labels.cert_name }} is going to expire in {{ $value }} seconds)"

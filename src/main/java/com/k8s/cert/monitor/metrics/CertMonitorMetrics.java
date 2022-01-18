@@ -35,9 +35,9 @@ public class CertMonitorMetrics {
             Long certExpiry = ChronoUnit.SECONDS.between(Instant.now(), expiryTime);
 
             Tags tags = Tags.of("cert_name", certificate.getMetadata().getName(), "cert_expiry_in_seconds", certExpiry.toString(), "cert_namespace", certificate.getMetadata().getNamespace());
-            Counter.builder("cert_details")
+            Counter.builder("cert_time_to_expire")
                     .tags(tags)
-                    .register(Metrics.globalRegistry).increment();
+                    .register(Metrics.globalRegistry).increment(certExpiry);
         }
     }
 
@@ -47,7 +47,6 @@ public class CertMonitorMetrics {
         List<Certificate> certificateList = certMonitorService.listAllCertsInAnyNamespace();
         try {
             logger.info("Scheduled scrapping for cert expiry details across namespaces.");
-            System.out.println("mani");
             publishCertMetrics(certificateList);
         } catch (Exception e) {
             logger.log(Level.SEVERE, String.format("Error while publishing cert metrics."), e);
